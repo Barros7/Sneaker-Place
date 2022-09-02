@@ -1,1 +1,11 @@
-node_modules/
+.vscode/
+node_modules/**/*
+
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+
+package-lock.json
