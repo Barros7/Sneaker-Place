@@ -1,0 +1,16 @@
+{
+    "select":{
+        "all":"SELECT * FROM %s",
+        "by_id":"SELECT * FROM %s WHERE id = '%s'",
+        "custom": "SELECT %s FROM %s"
+    },
+    "delete":{
+        "all":"DELETE FROM %s"
+    },
+    "update":{
+        "custom":"UPDATE %s SET %s WHERE %s"
+    },
+    "insert":{
+        "custom":"INSERT INTO '%s' VALUES ('%s')"
+    }
+}

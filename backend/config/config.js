@@ -7,8 +7,8 @@ const SERVER_PORT = process.env.SERVER_PORT;
 
 const MYSQL_HOST = process.env.MYSQL_HOST;
 const MYSQL_DATABASE = process.env.MYSQL_DATABASE;
-const MYSQL_USER = process.env.MYSQL_HOST;
-const MYSQL_PASS = process.env.MYSQL_HOST;
+const MYSQL_USER = process.env.MYSQL_USER;
+const MYSQL_PASS = process.env.MYSQL_PASS;
 
 const config = {
   server: {

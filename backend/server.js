@@ -3,9 +3,14 @@ import express from "express";
 import logging from "./config/logging.js";
 import config from "./config/config.js";
 import authentication from "./routes/authentication.js";
+import SneakerRoute from "./routes/sneakers.js";
+import Utils from "./utils.js";
 
 const NAMESPACE = "Server";
 const server = express();
+const UtilsInstance = new Utils(NAMESPACE);
+
+UtilsInstance.loadTables();
 
 server.use((req, res, next) => {
   /** Log the req */
@@ -48,6 +53,7 @@ server.use((req, res, next) => {
 
 /** Routes go here */
 server.use("/auth", authentication);
+server.use("/sneaker", SneakerRoute);
 
 /** Error handling */
 server.use((_, res, _2) => {

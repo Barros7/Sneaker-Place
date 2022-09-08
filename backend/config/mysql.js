@@ -1,15 +1,18 @@
 import mysql from "mysql";
-import config from "./config";
+import config from "./config.js";
 
 const params = {
   user: config.mysql.user,
   password: config.mysql.pass,
   host: config.mysql.host,
   database: config.mysql.database,
+  multipleStatements: false
 };
 
-const Connect = async () =>
-  new Promise()((resolve, reject) => {
+const Connect = async (multipleStatements = false) =>
+  new Promise((resolve, reject) => {
+    
+    params.multipleStatements = multipleStatements;
     const connection = mysql.createConnection(params);
 
     connection.connect((error) => {
