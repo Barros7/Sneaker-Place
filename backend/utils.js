@@ -1,5 +1,6 @@
 import { Connect, Query } from "./config/mysql.js";
 import logging from "./config/logging.js";
+import { StatusCodes } from "http-status-codes";
 import fs from "fs";
 
 const MULTIPLE_QUERIES = true;
@@ -32,7 +33,7 @@ export default class Utils {
 
   defaultError(error, response) {
     logging.error(this.namespace, error.message, error);
-    return response.status(200).json({
+    return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: error.message,
       error,
     });
