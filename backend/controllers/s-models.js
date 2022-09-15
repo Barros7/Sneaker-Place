@@ -3,7 +3,7 @@ import logging from "../config/logging.js";
 import { Connect, Query } from "../config/mysql.js";
 import Utils from "../utils.js";
 
-const NAMESPACE = "Sneakers";
+const NAMESPACE = "Sneaker Model";
 const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
@@ -11,14 +11,9 @@ async function create(req, res) {
     return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
   }
 
-  const query = `INSERT INTO Sneakers values (
-    ${req.body.Sneaker_id},
-    ${req.body.brand},
-    ${req.body.size},
-    ${req.body.color},
-    ${req.body.name},
-    ${req.body.description},
-    ${req.body.model_id},
+  const query = `INSERT INTO SneakerModels values (
+    ${req.body.Model_id},
+    ${req.body.Model},
     )`;
 
   Connect().then((connection) => {
@@ -38,16 +33,16 @@ async function create(req, res) {
   });
 }
 async function get(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Sneaker_id) {
+  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Model_id) {
     return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
   }
 
-  const query = `SELECT * Sneakers WHERE Sneaker_id = ${req.body.Sneaker_id}`;
+  const query = `SELECT * SneakerModels WHERE Model_id = ${req.body.Model_id}`;
 
   Connect().then((connection) => {
     Query(connection, query)
       .then((result) => {
-        logging.info(NAMESPACE, "Getting the Data", result);
+        logging.info(NAMESPACE, "Getting the Sneaker Model", result);
 
         return res.status(StatusCodes.OK).json({
           result,
@@ -63,11 +58,11 @@ async function get(req, res) {
 }
 
 async function update(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Sneaker_id) {
+  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Model_id) {
     return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
   }
 
-  let query = "UPDATE Sneakers SET ";
+  let query = "UPDATE SneakerModels SET ";
 
   const keys = Object.keys(req.body);
   keys.forEach((key, index) => {
@@ -79,37 +74,12 @@ async function update(req, res) {
     query.concat(`${key} = ${req.body[key]}`, ", ");
   });
 
-  query += `WHERE Sneaker_id = ${req.body.Sneaker_id}`;
+  query += `WHERE Model_id = ${req.body.Model_id}`;
 
   Connect().then((connection) => {
     Query(connection, query)
       .then((result) => {
-        logging.info(NAMESPACE, "Updating the data", result);
-
-        return res.status(StatusCodes.OK).json({
-          result,
-        });
-      })
-      .catch((error) => {
-        return UtilsInstance.defaultError(error, res);
-      })
-      .finally(() => {
-        UtilsInstance.closeDb(connection);
-      });
-  });
-}
-
-async function remove(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Sneaker_id) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
-
-  const query = `DELETE FROM Sneakers WHERE Sneaker_id = ${req.body.Sneaker_id}`;
-
-  Connect().then((connection) => {
-    Query(connection, query)
-      .then((result) => {
-        logging.info(NAMESPACE, "Deleting the data", result);
+        logging.info(NAMESPACE, "Updating the Sneaker Model", result);
 
         return res.status(StatusCodes.OK).json({
           result,
@@ -126,7 +96,6 @@ async function remove(req, res) {
 
 export default {
   create,
-  remove,
   update,
   get,
 };

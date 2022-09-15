@@ -5,7 +5,10 @@ import jwt from "jsonwebtoken";
 import logging from "./config/logging.js";
 import config from "./config/config.js";
 import authentication from "./routes/authentication.js";
-import SneakerRoute from "./routes/sneakers.js";
+import sneakerRoute from "./routes/sneakers.js";
+import orderRoute from "./routes/sneaker-orders.js";
+import salesRoute from "./routes/sneaker-sales.js";
+import sneakerModelsRoute from "./routes/sneaker-models.js";
 import Utils from "./utils.js";
 
 const NAMESPACE = "Server";
@@ -81,7 +84,11 @@ server.use((req, res, next) => {
 
 /** Routes go here */
 server.use("/auth", authentication);
-server.use("/sneaker", SneakerRoute);
+server.use("/sneaker", sneakerRoute);
+server.use("/sneakerModel", sneakerModelsRoute);
+server.use("/order", orderRoute);
+server.use("/sales", salesRoute);
+
 
 /** Error handling */
 server.use((_, res, _2) => {
