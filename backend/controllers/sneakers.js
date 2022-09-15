@@ -26,7 +26,7 @@ async function create(req, res) {
     Query(connection, query)
       .then((result) => {
         logging.info(NAMESPACE, `${NAMESPACE} successfully created`, result);
-        return res.status(200).json({
+        return res.status(StatusCodes.OK).json({
           result,
         });
       })
@@ -48,9 +48,9 @@ async function get(req, res) {
   Connect().then((connection) => {
     Query(connection, query)
       .then((result) => {
-        logging.info(NAMESPACE, ``, result);
+        logging.info(NAMESPACE, "Getting the Data", result);
 
-        return res.status(200).json({
+        return res.status(StatusCodes.OK).json({
           result,
         });
       })
@@ -85,9 +85,9 @@ async function update(req, res) {
   Connect().then((connection) => {
     Query(connection, query)
       .then((result) => {
-        logging.info(NAMESPACE, ``, result);
+        logging.info(NAMESPACE, "Updating the data", result);
 
-        return res.status(200).json({
+        return res.status(StatusCodes.OK).json({
           result,
         });
       })
@@ -110,9 +110,9 @@ async function remove(req, res) {
   Connect().then((connection) => {
     Query(connection, query)
       .then((result) => {
-        logging.info(NAMESPACE, ``, result);
+        logging.info(NAMESPACE, "Deleting the data", result);
 
-        return res.status(200).json({
+        return res.status(StatusCodes.OK).json({
           result,
         });
       })

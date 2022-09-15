@@ -1,6 +1,8 @@
 import { Connect, Query } from "./config/mysql.js";
 import logging from "./config/logging.js";
 import { StatusCodes } from "http-status-codes";
+import config from "./config/config.js";
+import jwt from "jsonwebtoken";
 import fs from "fs";
 
 const MULTIPLE_QUERIES = true;
@@ -9,6 +11,12 @@ const INITIAL_QUERIES_PATH = "./metadata/init.sql";
 export default class Utils {
   constructor(namespace) {
     this.namespace = namespace;
+  }
+
+  generateAccessToken(username) {
+    return jwt.sign(username, config.token, {
+      expiresIn: config.token.expiration,
+    });
   }
 
   loadTables() {

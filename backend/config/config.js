@@ -19,8 +19,13 @@ const config = {
     host: MYSQL_HOST,
     database: MYSQL_DATABASE,
     user: MYSQL_USER,
-    pass: MYSQL_PASS,
+    pass: MYSQL_PASSs,
   },
+  token: {
+    value: process.env.TOKEN_SECRET,
+    expiration:process.env.TOKEN_EXPIRATION
+  }
+    
 };
 
 export default config;
