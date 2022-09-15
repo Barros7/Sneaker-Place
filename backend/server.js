@@ -14,7 +14,7 @@ import Utils from "./utils.js";
 const NAMESPACE = "Server";
 const server = express();
 const UtilsInstance = new Utils(NAMESPACE);
-// UtilsInstance.loadTables();
+UtilsInstance.loadTables();
 
 server.use((req, res, next) => {
   /** Log the req */
