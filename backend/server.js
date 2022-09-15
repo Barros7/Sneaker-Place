@@ -73,7 +73,7 @@ server.use((req, res, next) => {
   jwt.verify(token, config.token.value, (err, payload) => {
     logging.error(NAMESPACE, err);
 
-    if (err) return sres.sendStatus(StatusCodes.FORBIDDEN);
+    if (err) return res.sendStatus(StatusCodes.FORBIDDEN);
 
     logging.info(NAMESPACE, "The request is Legit");
     req.jwt = payload;
