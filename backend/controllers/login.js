@@ -25,7 +25,6 @@ export function createUser(req, res) {
   }
 
   const query = `INSERT INTO Users values (
-    ${user.Users_id},
     ${user.Password},
     ${user.Email},
     ${user.Name},

@@ -12,7 +12,6 @@ async function create(req, res) {
   }
 
   const query = `INSERT INTO SneakerModels values (
-    ${req.body.Model_id},
     ${req.body.Model},
     )`;
 
@@ -32,12 +31,34 @@ async function create(req, res) {
       });
   });
 }
+
+async function getAll(req, res) {
+  const query = "SELECT * FROM SneakerModels";
+
+  Connect().then((connection) => {
+    Query(connection, query)
+      .then((result) => {
+        logging.info(NAMESPACE, "Getting All the Data", result);
+
+        return res.status(StatusCodes.OK).json({
+          result,
+        });
+      })
+      .catch((error) => {
+        return UtilsInstance.defaultError(error, res);
+      })
+      .finally(() => {
+        UtilsInstance.closeDb(connection);
+      });
+  });
+}
+
 async function get(req, res) {
   if (!req.body || Object.keys(req.body).length === 0 || !req.body.Model_id) {
     return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
   }
 
-  const query = `SELECT * SneakerModels WHERE Model_id = ${req.body.Model_id}`;
+  const query = `SELECT * FROM SneakerModels WHERE Model_id = ${req.body.Model_id}`;
 
   Connect().then((connection) => {
     Query(connection, query)
@@ -98,4 +119,5 @@ export default {
   create,
   update,
   get,
+  getAll
 };

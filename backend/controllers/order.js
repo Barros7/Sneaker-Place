@@ -34,6 +34,28 @@ async function create(req, res) {
       });
   });
 }
+
+async function getAll(_, res) {
+  const query = "SELECT * FROM Orders";
+
+  Connect().then((connection) => {
+    Query(connection, query)
+      .then((result) => {
+        logging.info(NAMESPACE, "Getting All the Data", result);
+
+        return res.status(StatusCodes.OK).json({
+          result,
+        });
+      })
+      .catch((error) => {
+        return UtilsInstance.defaultError(error, res);
+      })
+      .finally(() => {
+        UtilsInstance.closeDb(connection);
+      });
+  });
+}
+
 async function get(req, res) {
   if (
     !req.body ||
@@ -44,7 +66,7 @@ async function get(req, res) {
     return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
   }
 
-  const query = `SELECT * Orders WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
+  const query = `SELECT * FROM Orders WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {
     Query(connection, query)
@@ -67,4 +89,5 @@ async function get(req, res) {
 export default {
   create,
   get,
+  getAll
 };

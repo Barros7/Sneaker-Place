@@ -12,7 +12,6 @@ async function create(req, res) {
   }
 
   const query = `INSERT INTO Sneakers values (
-    ${req.body.Sneaker_id},
     ${req.body.brand},
     ${req.body.size},
     ${req.body.color},
@@ -37,17 +36,39 @@ async function create(req, res) {
       });
   });
 }
+
 async function get(req, res) {
   if (!req.body || Object.keys(req.body).length === 0 || !req.body.Sneaker_id) {
     return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
   }
 
-  const query = `SELECT * Sneakers WHERE Sneaker_id = ${req.body.Sneaker_id}`;
+  const query = `SELECT * FROM Sneakers WHERE Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {
     Query(connection, query)
       .then((result) => {
         logging.info(NAMESPACE, "Getting the Data", result);
+
+        return res.status(StatusCodes.OK).json({
+          result,
+        });
+      })
+      .catch((error) => {
+        return UtilsInstance.defaultError(error, res);
+      })
+      .finally(() => {
+        UtilsInstance.closeDb(connection);
+      });
+  });
+}
+async function getAll(_, res) {
+
+  const query = 'SELECT * FROM Sneakers';
+
+  Connect().then((connection) => {
+    Query(connection, query)
+      .then((result) => {
+        logging.info(NAMESPACE, "Getting All the Data", result);
 
         return res.status(StatusCodes.OK).json({
           result,
@@ -128,5 +149,6 @@ export default {
   create,
   remove,
   update,
+  getAll,
   get,
 };
