@@ -10,16 +10,18 @@ export function jwtAuth(req, res, next) {
   logging.info(NAMESPACE, "This Route needs Authentication");
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
-  if (token == null) return res.sendStatus(StatusCodes.UNAUTHORIZED).json({
-    message: "This Route needs Authentication",
-  });
+  if (token == null)
+    return res.sendStatus(StatusCodes.UNAUTHORIZED).json({
+      message: "This Route needs Authentication",
+    });
 
   jwt.verify(token, config.token.value, (err, payload) => {
     logging.error(NAMESPACE, err);
 
-    if (err) return res.sendStatus(StatusCodes.FORBIDDEN).json({
-      err
-    });
+    if (err)
+      return res.sendStatus(StatusCodes.FORBIDDEN).json({
+        err,
+      });
 
     logging.info(NAMESPACE, "The request is Legit");
     req.jwt = payload;
@@ -28,7 +30,7 @@ export function jwtAuth(req, res, next) {
   });
 }
 
-export function serverStatus (req, res, next) {
+export function serverStatus(req, res, next) {
   /** Log the req */
   logging.info(
     NAMESPACE,
@@ -44,9 +46,8 @@ export function serverStatus (req, res, next) {
   });
 
   next();
-
 }
-export function serverRules (req, res, next) {
+export function serverRules(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -62,7 +63,7 @@ export function serverRules (req, res, next) {
   next();
 }
 
-export function errorHandler (_, res, _2) {
+export function errorHandler(_, res, _2) {
   const error = new Error("Not found");
 
   res.status(StatusCodes.NOT_FOUND).json({
@@ -71,13 +72,13 @@ export function errorHandler (_, res, _2) {
   res.end();
 }
 
-export function validateRequestBody (req, res, next){
-  if (!req.body || Object.keys(req.body).length == 0 ) {
+export function validateRequestBody(req, res, next) {
+  if (!req.body || Object.keys(req.body).length == 0) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "The body is empty but is required",
     });
   }
-  next()
+  next();
 }
 
 export function validateDataIntegrity(req, res, next) {
@@ -92,7 +93,7 @@ export function validateDataIntegrity(req, res, next) {
 
   if (!valid) {
     return res.status(StatusCodes.BAD_REQUEST).json({
-      message:`This fields are empty ${invalidFields}`
+      message: `This fields are empty ${invalidFields}`,
     });
   }
   next();

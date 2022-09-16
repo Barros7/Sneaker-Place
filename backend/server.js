@@ -8,7 +8,14 @@ import orderRoute from "./routes/sneaker-orders.js";
 import salesRoute from "./routes/sneaker-sales.js";
 import sneakerModelsRoute from "./routes/sneaker-models.js";
 import Utils from "./utils.js";
-import { errorHandler, serverRules,jwtAuth, serverStatus, validateRequestBody, validateDataIntegrity } from "./middleware.js";
+import {
+  errorHandler,
+  serverRules,
+  jwtAuth,
+  serverStatus,
+  validateRequestBody,
+  validateDataIntegrity,
+} from "./middleware.js";
 
 const NAMESPACE = "Server";
 const server = express();
@@ -23,7 +30,6 @@ server.use(bodyParser.json());
 
 /** Rules of the server */
 server.use(serverRules);
-
 
 /** Routes go here */
 server.use("/auth", validateRequestBody, validateDataIntegrity, authentication);
