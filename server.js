@@ -7,6 +7,8 @@ import sneakerRoute from "./routes/sneakers.js";
 import orderRoute from "./routes/sneaker-orders.js";
 import salesRoute from "./routes/sneaker-sales.js";
 import sneakerModelsRoute from "./routes/sneaker-models.js";
+import cors from "cors";
+
 import Utils from "./utils.js";
 import {
   errorHandler,
@@ -30,6 +32,8 @@ server.use(bodyParser.json());
 
 /** Rules of the server */
 server.use(serverRules);
+
+server.use(cors());
 
 /** Routes go here */
 server.use("/auth", authentication);
