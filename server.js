@@ -49,6 +49,6 @@ server.use(errorHandler);
 server.listen(config.server.port, () => {
   logging.info(
     NAMESPACE,
-    `Server is running ${config.server.hostname}:${config.server.port}`
+    `Server is running ${config.server.hostname}`
   );
 });
