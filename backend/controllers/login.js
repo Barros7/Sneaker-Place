@@ -1,4 +1,4 @@
-import {StatusCodes } from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 import logging from "../config/logging.js";
 import { Connect, Query } from "../config/mysql.js";
 import Utils from "../utils.js";

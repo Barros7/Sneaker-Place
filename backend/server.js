@@ -1,7 +1,5 @@
 import bodyParser from "body-parser";
 import express from "express";
-import { StatusCodes } from "http-status-codes";
-import jwt from "jsonwebtoken";
 import logging from "./config/logging.js";
 import config from "./config/config.js";
 import authentication from "./routes/authentication.js";
@@ -15,7 +13,7 @@ import { errorHandler, serverRules,jwtAuth, serverStatus, validateRequestBody, v
 const NAMESPACE = "Server";
 const server = express();
 const UtilsInstance = new Utils(NAMESPACE);
-// UtilsInstance.loadTables();
+UtilsInstance.loadTables();
 
 server.use(serverStatus);
 

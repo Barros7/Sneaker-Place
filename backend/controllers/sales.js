@@ -1,4 +1,4 @@
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 import logging from "../config/logging.js";
 import { Connect, Query } from "../config/mysql.js";
 import Utils from "../utils.js";
@@ -7,7 +7,6 @@ const NAMESPACE = "Sales";
 const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
-
   const query = `INSERT INTO Sales (Sneaker_id, Users_id) VALUES (
     ${req.body.Sneaker_id},
     ${req.body.Users_id},
@@ -51,7 +50,6 @@ async function getAll(_, res) {
 }
 
 async function get(req, res) {
-
   const query = `SELECT * FROM Sales WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {
@@ -75,5 +73,5 @@ async function get(req, res) {
 export default {
   create,
   get,
-  getAll
+  getAll,
 };

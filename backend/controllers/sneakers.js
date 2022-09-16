@@ -1,4 +1,4 @@
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 import logging from "../config/logging.js";
 import { Connect, Query } from "../config/mysql.js";
 import Utils from "../utils.js";
@@ -7,7 +7,6 @@ const NAMESPACE = "Sneakers";
 const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
-
   const query = `INSERT INTO Sneakers (Brand,Price,Size,Color,Name,Model_id,Description) VALUES (
     "${req.body.Brand}",
     ${req.body.Price},
@@ -36,7 +35,6 @@ async function create(req, res) {
 }
 
 async function get(req, res) {
- 
   const query = `SELECT * FROM Sneakers WHERE Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {
@@ -57,8 +55,7 @@ async function get(req, res) {
   });
 }
 async function getAll(_, res) {
-
-  const query = 'SELECT * FROM Sneakers';
+  const query = "SELECT * FROM Sneakers";
 
   Connect().then((connection) => {
     Query(connection, query)
@@ -79,29 +76,24 @@ async function getAll(_, res) {
 }
 
 async function update(req, res) {
-
   let query = "UPDATE Sneakers SET ";
 
   const keys = Object.keys(req.body);
   keys.forEach((key, index) => {
     console.log(query);
     if (key == "Sneaker_id") return;
-    if (typeof req.body[key] === "string")
-    {
+    if (typeof req.body[key] === "string") {
       if (index == keys.length - 1) {
         query += `${key} = "${req.body[key]}"`;
         return;
       }
       query += `${key} = "${req.body[key]}" ,`;
-
-    }
-    else {
+    } else {
       if (index == keys.length - 1) {
         query += `${key} = ${req.body[key]}`;
         return;
       }
       query += `${key} = ${req.body[key]} ,`;
-
     }
   });
 
@@ -126,7 +118,6 @@ async function update(req, res) {
 }
 
 async function remove(req, res) {
-
   const query = `DELETE FROM Sneakers WHERE Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {

@@ -1,4 +1,4 @@
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 import logging from "../config/logging.js";
 import { Connect, Query } from "../config/mysql.js";
 import Utils from "../utils.js";
@@ -7,7 +7,6 @@ const NAMESPACE = "Sneaker Model";
 const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
-
   const query = `INSERT INTO SneakerModels (Model) VALUES (
     "${req.body.Model}"
     )`;
@@ -51,10 +50,6 @@ async function getAll(req, res) {
 }
 
 async function get(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Model_id) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
-
   const query = `SELECT * FROM SneakerModels WHERE Model_id = ${req.body.Model_id}`;
 
   Connect().then((connection) => {
@@ -112,5 +107,5 @@ export default {
   create,
   update,
   get,
-  getAll
+  getAll,
 };
