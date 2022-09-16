@@ -14,7 +14,8 @@ export default class Utils {
   }
 
   generateAccessToken(username) {
-    return jwt.sign(username, config.token, {
+    console.log(typeof config.token.expiration);
+    return jwt.sign({ username }, config.token.value, {
       expiresIn: config.token.expiration,
     });
   }

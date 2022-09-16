@@ -7,16 +7,13 @@ const NAMESPACE = "Order";
 const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
 
-  const query = `INSERT INTO Orders values (
+  const query = `INSERT INTO Orders (Order_date,Order_date,Users_id,Sneaker_id) VALUES (
     ${req.body.Order_date},
     ${req.body.Order_time},
     ${req.body.Users_id},
     ${req.body.Sneaker_id},
-    )`;
+  )`;
 
   Connect().then((connection) => {
     Query(connection, query)
@@ -57,15 +54,7 @@ async function getAll(_, res) {
 }
 
 async function get(req, res) {
-  if (
-    !req.body ||
-    Object.keys(req.body).length === 0 ||
-    !req.body.Users_id ||
-    !req.body.Sneaker_id
-  ) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
-
+  
   const query = `SELECT * FROM Orders WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {

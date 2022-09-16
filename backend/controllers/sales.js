@@ -7,17 +7,14 @@ const NAMESPACE = "Sales";
 const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
 
-  const query = `INSERT INTO Sales values (
+  const query = `INSERT INTO Sales (Sneaker_id, Users_id) VALUES (
     ${req.body.Sneaker_id},
     ${req.body.Users_id},
     )`;
 
   Connect().then((connection) => {
-    Query(connection, query)
+    Query(connection, query.replace(/(\r\n|\n|\r)/gm, ""))
       .then((result) => {
         logging.info(NAMESPACE, `${NAMESPACE} successfully created`, result);
         return res.status(StatusCodes.OK).json({
@@ -54,14 +51,6 @@ async function getAll(_, res) {
 }
 
 async function get(req, res) {
-  if (
-    !req.body ||
-    Object.keys(req.body).length === 0 ||
-    !req.body.Users_id ||
-    !req.body.Sneaker_id
-  ) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
 
   const query = `SELECT * FROM Sales WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
 

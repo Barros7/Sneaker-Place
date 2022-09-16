@@ -7,21 +7,19 @@ const NAMESPACE = "Sneakers";
 const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
 
-  const query = `INSERT INTO Sneakers values (
-    ${req.body.brand},
-    ${req.body.size},
-    ${req.body.color},
-    ${req.body.name},
-    ${req.body.description},
-    ${req.body.model_id},
+  const query = `INSERT INTO Sneakers (Brand,Price,Size,Color,Name,Model_id,Description) VALUES (
+    "${req.body.Brand}",
+    ${req.body.Price},
+    ${req.body.Size},
+    "${req.body.Color}",
+    "${req.body.Name}",
+    ${req.body.Model_id},
+    "${req.body.Description}"
     )`;
 
   Connect().then((connection) => {
-    Query(connection, query)
+    Query(connection, query.replace(/(\r\n|\n|\r)/gm, ""))
       .then((result) => {
         logging.info(NAMESPACE, `${NAMESPACE} successfully created`, result);
         return res.status(StatusCodes.OK).json({
@@ -38,10 +36,7 @@ async function create(req, res) {
 }
 
 async function get(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Sneaker_id) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
-
+ 
   const query = `SELECT * FROM Sneakers WHERE Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {
@@ -84,23 +79,33 @@ async function getAll(_, res) {
 }
 
 async function update(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Sneaker_id) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
 
   let query = "UPDATE Sneakers SET ";
 
   const keys = Object.keys(req.body);
   keys.forEach((key, index) => {
-    if (key == "id") return;
-    if (index == keys.length - 1) {
-      query += `${key} = ${req.body[key]}`;
-      return;
+    console.log(query);
+    if (key == "Sneaker_id") return;
+    if (typeof req.body[key] === "string")
+    {
+      if (index == keys.length - 1) {
+        query += `${key} = "${req.body[key]}"`;
+        return;
+      }
+      query += `${key} = "${req.body[key]}" ,`;
+
     }
-    query.concat(`${key} = ${req.body[key]}`, ", ");
+    else {
+      if (index == keys.length - 1) {
+        query += `${key} = ${req.body[key]}`;
+        return;
+      }
+      query += `${key} = ${req.body[key]} ,`;
+
+    }
   });
 
-  query += `WHERE Sneaker_id = ${req.body.Sneaker_id}`;
+  query += ` WHERE Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {
     Query(connection, query)
@@ -121,9 +126,6 @@ async function update(req, res) {
 }
 
 async function remove(req, res) {
-  if (!req.body || Object.keys(req.body).length === 0 || !req.body.Sneaker_id) {
-    return res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
-  }
 
   const query = `DELETE FROM Sneakers WHERE Sneaker_id = ${req.body.Sneaker_id}`;
 
