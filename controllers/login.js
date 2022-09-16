@@ -47,13 +47,13 @@ export function createUser(req, res) {
 }
 
 export function login(req, res) {
-  if (!req.body.Name) {
+  if (!req.body.Email) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Username not Specified",
     });
   }
 
-  const query = `SELECT * FROM Users WHERE Name = '${req.body.Name}'`;
+  const query = `SELECT * FROM Users WHERE Email = '${req.body.Email}'`;
 
   Connect().then((connection) => {
     Query(connection, query)
