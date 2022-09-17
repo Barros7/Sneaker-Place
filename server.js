@@ -14,7 +14,7 @@ import {
   errorHandler,
   serverRules,
   jwtAuth,
-  serverStatus, 
+  serverStatus,
   validateRequestBody,
   validateDataIntegrity,
 } from "./middleware.js";
@@ -49,6 +49,6 @@ server.use(errorHandler);
 server.listen(config.server.port, () => {
   logging.info(
     NAMESPACE,
-    `Server is running ${config.server.hostname}`
+    `Server is running ${config.server.hostname}:${config.server.port}`
   );
 });
