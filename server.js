@@ -10,9 +10,16 @@ import sneakerModelsRoute from "./routes/sneaker-models.js";
 import cors from "cors";
 
 /* ============= */
+/* ============= */
+/* ============= */
+/* ============= */
+
 const port = process.env.PORT || 3005;
 let host = 'http://localhost';
 
+/* ============= */
+/* ============= */
+/* ============= */
 /* ============= */
 
 import Utils from "./utils.js";
