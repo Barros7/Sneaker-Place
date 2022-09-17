@@ -7,7 +7,7 @@ const NAMESPACE = "login";
 const UtilsInstance = new Utils(NAMESPACE);
 
 export function createUser(req, res) {
-  if (Object.keys(req.body).length <= 10) {
+  if (Object.keys(req.body).length < 10) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message:"Invalid number of fields needs 10",
     });
