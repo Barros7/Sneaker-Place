@@ -8,9 +8,6 @@
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines": {
-    "node": "12.13.x"
-  },
   "author": "flk",
   "license": "ISC",
   "dependencies": {
