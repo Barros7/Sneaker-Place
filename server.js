@@ -9,6 +9,12 @@ import salesRoute from "./routes/sneaker-sales.js";
 import sneakerModelsRoute from "./routes/sneaker-models.js";
 import cors from "cors";
 
+/* ============= */
+const port = 3005;
+const host = 'http://localhost';
+
+/* ============= */
+
 import Utils from "./utils.js";
 import {
   errorHandler,
@@ -47,10 +53,9 @@ server.use(errorHandler);
 
 /** Server Listening**/
 
-const PORT = process.env.PORT
-server.listen(PORT, () => {
+server.listen(port, () => {
   logging.info(
     NAMESPACE,
-    `Server is running ${config.server.hostname}:${PORT}`
+    `Server is running ${host}:${port}`
   );
 });
