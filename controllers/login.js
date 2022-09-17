@@ -49,7 +49,7 @@ export function createUser(req, res) {
 export function login(req, res) {
   if (!req.body.Email) {
     return res.status(StatusCodes.BAD_REQUEST).json({
-      message: "Username not Specified",
+      message: "Email not Specified",
     });
   }
 

@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get("/getAll", salesController.getAll);
 router.get("/get",validateRequestBody, validateDataIntegrity, salesController.get);
-router.put("/create",validateRequestBody, validateDataIntegrity, salesController.create);
+router.post("/create",validateRequestBody, validateDataIntegrity, salesController.create);
 
 export default router;

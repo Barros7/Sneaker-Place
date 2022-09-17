@@ -14,7 +14,7 @@ import cors from "cors";
 /* ============= */
 /* ============= */
 
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 9877;
 let host = 'http://localhost';
 
 /* ============= */

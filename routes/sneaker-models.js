@@ -11,13 +11,13 @@ router.get(
   validateDataIntegrity,
   sModelController.get
 );
-router.post(
+router.put(
   "/update",
   validateRequestBody,
   validateDataIntegrity,
   sModelController.update
 );
-router.put(
+router.post(
   "/create",
   validateRequestBody,
   validateDataIntegrity,

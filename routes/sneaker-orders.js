@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get("/getAll", orderController.getAll);
 router.get("/getOrder",validateRequestBody, validateDataIntegrity, orderController.get);
-router.put("/createOrder",validateRequestBody, validateDataIntegrity, orderController.create);
+router.post("/createOrder",validateRequestBody, validateDataIntegrity, orderController.create);
 
 export default router;
