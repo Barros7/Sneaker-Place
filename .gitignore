@@ -7,5 +7,6 @@ node_modules/**/*
 *.key
 *.mobileprovision
 *.orig.*
+*.env
 
 package-lock.json*
