@@ -14,7 +14,7 @@ import {
   errorHandler,
   serverRules,
   jwtAuth,
-  serverStatus,
+  serverStatus, 
   validateRequestBody,
   validateDataIntegrity,
 } from "./middleware.js";
@@ -31,9 +31,14 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
 /** Rules of the server */
-server.use(serverRules);
+//server.use(serverRules);
 
 server.use(cors());
+
+server.options("*", cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
+
+server.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }));
+
 
 /** Routes go here */
 server.use("/auth", authentication);
