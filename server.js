@@ -46,9 +46,11 @@ server.use("/sales", jwtAuth, salesRoute);
 server.use(errorHandler);
 
 /** Server Listening**/
-server.listen(config.server.port, () => {
+
+const PORT = process.env.PORT
+server.listen(PORT, () => {
   logging.info(
     NAMESPACE,
-    `Server is running ${config.server.hostname}:${config.server.port}`
+    `Server is running ${config.server.hostname}:${PORT}`
   );
 });
