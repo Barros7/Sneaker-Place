@@ -51,7 +51,7 @@ server.use(cors());
 /** Routes go here */
 server.use("/auth", authentication);
 server.use("/sneaker", sneakerRoute);
-server.use("/sneakerModel", jwtAuth, sneakerModelsRoute);
+server.use("/sneakerModel", sneakerModelsRoute);
 server.use("/order", jwtAuth, orderRoute);
 server.use("/sales", jwtAuth, salesRoute);
 

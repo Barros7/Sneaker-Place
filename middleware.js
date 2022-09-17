@@ -73,6 +73,8 @@ export function errorHandler(_, res, _2) {
 }
 
 export function validateRequestBody(req, res, next) {
+  console.log(req.body)
+
   if (!req.body || Object.keys(req.body).length == 0) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "The body is empty but is required",
@@ -82,6 +84,8 @@ export function validateRequestBody(req, res, next) {
 }
 
 export function validateDataIntegrity(req, res, next) {
+  console.log(req.body)
+
   let valid = true;
   let invalidFields = [];
   Object.keys(req.body).forEach((key) => {
