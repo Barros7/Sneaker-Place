@@ -35,9 +35,9 @@ server.use(bodyParser.json());
 
 server.use(cors());
 
-server.options("*", cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
+server.options("*", cors({ origin: 'https://sneakerplaceweb.herokuapp.com/register', optionsSuccessStatus: 200 }));
 
-server.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }));
+server.use(cors({ origin: "https://sneakerplaceweb.herokuapp.com/register", optionsSuccessStatus: 200 }));
 
 
 /** Routes go here */
