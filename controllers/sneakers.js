@@ -10,7 +10,7 @@ async function create(req, res) {
   const query = `INSERT INTO Sneakers (Brand,Price,Photo,Size,Color,Name,Model_id,Description) VALUES (
     "${req.body.Brand}",
     ${req.body.Price},
-    ${req.body.Photo},
+    "${req.body.Photo}",
     ${req.body.Size},
     "${req.body.Color}",
     "${req.body.Name}",
