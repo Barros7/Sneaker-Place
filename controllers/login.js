@@ -47,7 +47,8 @@ export function createUser(req, res) {
 }
 
 export function login(req, res) {
-  if (!req.body.Email) {
+  const { Email, Password } = req.body;
+  if (!Email || !Password) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Email not Specified",
     });
@@ -59,11 +60,11 @@ export function login(req, res) {
     Query(connection, query)
       .then((result) => {
         logging.info(NAMESPACE, "Getting the User", result);
-        if (!result  || result.length === 0 ) return res.status(StatusCodes.NOT_FOUND).json({
+        if (!result  || result.length === 0 || result[0].Password !== Password ) return res.status(StatusCodes.NOT_FOUND).json({
           message:"User not found"
         });
 
-        const userToken = UtilsInstance.generateAccessToken(req.body.Name);
+        const userToken = UtilsInstance.generateAccessToken(req.body.Email);
         res.set("x-access-token", userToken);
         return res.status(StatusCodes.OK).json({
           result,
