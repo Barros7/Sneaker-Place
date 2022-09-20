@@ -5,12 +5,14 @@ CREATE TABLE IF NOT EXISTS SneakerModels
   PRIMARY KEY (Model_id)
 );
 
+DROP TABLE IF EXISTS Sneakers;
 CREATE TABLE IF NOT EXISTS Sneakers
 (
   Sneaker_id INT NOT NULL AUTO_INCREMENT,
   Brand VARCHAR(15) NOT NULL,
   Price FLOAT NOT NULL,
   Size FLOAT NOT NULL,
+  Photo VARCHAR(32),
   Color VARCHAR(10) NOT NULL,
   Name VARCHAR(15) NOT NULL,
   Model_id INT NOT NULL,
@@ -37,12 +39,14 @@ CREATE TABLE IF NOT EXISTS Users
   PRIMARY KEY (Users_id)
 );
 
+DROP TABLE IF EXISTS Orders;
 CREATE TABLE IF NOT EXISTS Orders
 (
   Order_date DATE NOT NULL,
   Order_time TIME NOT NULL,
   Users_id INT NOT NULL,
   Sneaker_id INT NOT NULL,
+  Price FLOAT NOT NULL,
   PRIMARY KEY (Users_id, Sneaker_id),
   FOREIGN KEY (Users_id) REFERENCES Users(Users_id),
   FOREIGN KEY (Sneaker_id) REFERENCES Sneakers(Sneaker_id)
@@ -77,10 +81,12 @@ CREATE TABLE IF NOT EXISTS Comments
   FOREIGN KEY (Sneaker_id) REFERENCES Sneakers(Sneaker_id)
 );
 
+DROP TABLE IF EXISTS Sales;
 CREATE TABLE IF NOT EXISTS Sales
 (
   Sneaker_id INT NOT NULL,
   Users_id INT NOT NULL,
+  Price FLOAT NOT NULL,
   PRIMARY KEY (Sneaker_id, Users_id),
   FOREIGN KEY (Sneaker_id) REFERENCES Sneakers(Sneaker_id),
   FOREIGN KEY (Users_id) REFERENCES Users(Users_id)
