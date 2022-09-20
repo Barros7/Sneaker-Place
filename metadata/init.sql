@@ -1,5 +1,3 @@
-DROP TABLE Sneakers, Orders, Sales;
-
 CREATE TABLE IF NOT EXISTS SneakerModels
 (
   Model_id INT NOT NULL AUTO_INCREMENT,
