@@ -53,7 +53,7 @@ server.use("/auth", authentication);
 server.use("/sneaker", sneakerRoute);
 server.use("/sneakerModel", sneakerModelsRoute);
 server.use("/order", jwtAuth, orderRoute);
-server.use("/sales", jwtAuth, salesRoute);
+server.use("/sales", salesRoute);
 
 /** Error handling */
 server.use(errorHandler);

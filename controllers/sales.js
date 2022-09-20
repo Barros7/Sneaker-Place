@@ -7,9 +7,10 @@ const NAMESPACE = "Sales";
 const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
-  const query = `INSERT INTO Sales (Sneaker_id, Users_id) VALUES (
+  const query = `INSERT INTO Sales (Sneaker_id, Users_id, Price) VALUES (
     ${req.body.Sneaker_id},
     ${req.body.Users_id},
+    ${req.body.Price},
     )`;
 
   Connect().then((connection) => {
