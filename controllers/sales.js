@@ -14,7 +14,7 @@ async function create(req, res) {
     )`;
 
   Connect().then((connection) => {
-    Query(connection, query.replace(/(\r\n|\n|\r)/gm, ""))
+    Query(connection, query.replace(/(\r\n|\n|\n|\r)/gm, ""))
       .then((result) => {
         logging.info(NAMESPACE, `${NAMESPACE} successfully created`, result);
         return res.status(StatusCodes.OK).json({
