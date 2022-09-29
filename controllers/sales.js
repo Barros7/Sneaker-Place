@@ -32,16 +32,11 @@ async function create(req, res) {
 async function getAll(_, res) {
   const query1 = "SELECT * FROM Sales";
 
-  const query = `SELECT
-    Users.Name,
-    Sneakers.Name,
-    Sneakers.Brand,
-    Sneakers.Photo
-    FROM Users
-    JOIN Sales
-      ON Sneakers.Sneaker_id = Sales.Users_id
-    JOIN Sneakers
-      ON Sneakers.Users_id = Sales.Sneaker_id`;
+  const query = `SELECT 
+  Sneakers.Name, Sneakers.Brand,
+  Sales.Price
+      FROM Sneakers FULL OUTER JOIN Sales ON Sneakers.Sneaker_id = Sales.Users_id
+  ORDER BY Sneakers.Sneaker_id;`;
 
   Connect().then((connection) => {
     Query(connection, query)
