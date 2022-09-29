@@ -34,6 +34,7 @@ async function getAll(_, res) {
 
   const query = `SELECT 
   Sneakers.Name, Sneakers.Brand,
+  Users.Email,
   Sales.Price
       FROM Sneakers 
       JOIN Sales
