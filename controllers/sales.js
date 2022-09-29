@@ -30,9 +30,9 @@ async function create(req, res) {
   });
 }
 async function getAll(_, res) {
-  const query = "SELECT * FROM Sales";
+  const query1 = "SELECT * FROM Sales";
 
-  const query1 = `SELECT
+  const query = `SELECT
     Users.Name,
     Sneakers.Name,
     Sneakers.Brand,
