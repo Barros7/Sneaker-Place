@@ -30,7 +30,15 @@ async function create(req, res) {
   });
 }
 async function getAll(_, res) {
-  const query = "SELECT * FROM Sales";
+  const query = `SELECT 
+  Sneakers.Name, Sneakers.Brand,
+  Sales.Sneaker_id, Sales.Users_id, Sales.Price
+      FROM Sneakers 
+      JOIN Sales
+      ON Sneakers.Sneaker_id = Sales.Sneaker_id
+      JOIN Users
+      ON Users.Users_id = Sales.Users_id
+      ORDER BY Sneakers.Sneaker_id;`;
 
   Connect().then((connection) => {
     Query(connection, query)
@@ -52,17 +60,7 @@ async function getAll(_, res) {
 
 async function get(req, res) {
 
-  //const query1 = `SELECT * FROM Sales WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
-
-  const query = `SELECT 
-    Sneakers.Name, Sneakers.Brand,
-    Sales.Sneaker_id, Sales.Users_id, Sales.Price
-        FROM Sneakers 
-        JOIN Sales
-        ON Sneakers.Sneaker_id = Sales.Sneaker_id
-        JOIN Users
-        ON Users.Users_id = Sales.Users_id
-        ORDER BY Sneakers.Sneaker_id;`;
+  const query = `SELECT * FROM Sales WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
 
   Connect().then((connection) => {
     Query(connection, query)
