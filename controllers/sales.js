@@ -31,7 +31,7 @@ async function create(req, res) {
 }
 async function getAll(_, res) {
   const query = `SELECT 
-  Sneakers.Name, Sneakers.Brand,
+  Sneakers.Name, Sneakers.Brand, Sneakers.Photo, Sneakers.Color,
   Sales.Sneaker_id, Sales.Users_id, Sales.Price
       FROM Sneakers 
       JOIN Sales
