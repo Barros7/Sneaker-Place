@@ -41,7 +41,7 @@ async function getAll(_, res) {
     JOIN Sales
       ON Sneakers.Sneaker_id = Sales.Users_id
     JOIN Sneakers
-      ON Sneakers.Users_id = Sales.Sneaker_id;`;
+      ON Sneakers.Users_id = Sales.Sneaker_id`;
 
   Connect().then((connection) => {
     Query(connection, query)
