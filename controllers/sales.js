@@ -52,11 +52,11 @@ async function getAll(_, res) {
 
 async function get(req, res) {
 
-  const query1 = `SELECT * FROM Sales WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
+  //const query1 = `SELECT * FROM Sales WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
 
   const query = `SELECT 
     Sneakers.Name, Sneakers.Brand,
-    Sales.Price
+    Sales.Sneaker_id, Sales.Users_id, Sales.Price
         FROM Sneakers 
         JOIN Sales
         ON Sneakers.Sneaker_id = Sales.Sneaker_id
