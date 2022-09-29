@@ -63,8 +63,8 @@ async function get(req, res) {
         ON Sneakers.Sneaker_id = Sales.Sneaker_id
         JOIN Users
         ON Users.Users_id = Sales.Users_id
-        WHERE Users_id = 1 
-        AND Sneaker_id = 1
+        WHERE Users_id = ${req.body.Users_id} 
+        AND Sneaker_id = ${req.body.Sneaker_id}
     ORDER BY Sneakers.Sneaker_id;`;
 
   Connect().then((connection) => {
