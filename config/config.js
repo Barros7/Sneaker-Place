@@ -6,9 +6,9 @@ const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME;
 const SERVER_PORT = process.env.SERVER_PORT;
 
 const MYSQL_HOST = process.env.MYSQL_HOST || 'eu-cdbr-west-03.cleardb.net';
-const MYSQL_DATABASE = process.env.MYSQL_DATABASE || 'heroku_c42cffc14216629';
-const MYSQL_USER = process.env.MYSQL_USER || 'b6e7b249a1f3dd';
-const MYSQL_PASS = process.env.MYSQL_PASS || '1773d455';
+const MYSQL_DATABASE = process.env.MYSQL_DATABASE || 'heroku_3905732dcb8c5a8';
+const MYSQL_USER = process.env.MYSQL_USER || 'b914075acea4be';
+const MYSQL_PASS = process.env.MYSQL_PASS || 'cab019d9';
 
 const config = {
   server: {

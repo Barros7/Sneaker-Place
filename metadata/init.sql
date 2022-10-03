@@ -40,8 +40,7 @@ CREATE TABLE IF NOT EXISTS Users
 
 CREATE TABLE IF NOT EXISTS Orders
 (
-  Order_date DATE NOT NULL,
-  Order_time TIME NOT NULL,
+  Order_timestamp TIMESTAMP,
   Users_id INT NOT NULL,
   Sneaker_id INT NOT NULL,
   Price FLOAT NOT NULL,

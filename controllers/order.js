@@ -8,7 +8,7 @@ const UtilsInstance = new Utils(NAMESPACE);
 
 async function create(req, res) {
 
-  const query = `INSERT INTO Orders (Order_date,Order_date,Users_id,Sneaker_id) VALUES (
+  const query = `INSERT INTO Orders (Order_date,Order_time,Users_id,Sneaker_id) VALUES (
     "${req.body.Order_date}",
     "${req.body.Order_time}",
     ${req.body.Users_id},
