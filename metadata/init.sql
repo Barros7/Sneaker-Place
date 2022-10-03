@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS Sales
   Sneaker_id INT NOT NULL,
   Users_id INT NOT NULL,
   Price FLOAT NOT NULL,
+  Size INT NOT NULL,
   PRIMARY KEY (Sneaker_id, Users_id),
   FOREIGN KEY (Sneaker_id) REFERENCES Sneakers(Sneaker_id),
   FOREIGN KEY (Users_id) REFERENCES Users(Users_id)
