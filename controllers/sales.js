@@ -11,7 +11,7 @@ async function create(req, res) {
     ${req.body.Sneaker_id},
     ${req.body.Users_id},
     ${req.body.Price},
-    ${req.body.Size},
+    ${req.body.Size}
     )`;
 
   Connect().then((connection) => {
