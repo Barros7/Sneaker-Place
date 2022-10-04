@@ -6,6 +6,48 @@ import Utils from "../utils.js";
 const NAMESPACE = "login";
 const UtilsInstance = new Utils(NAMESPACE);
 
+export async function updateUser(req, res) {
+  let query = "UPDATE Users SET ";
+
+  const keys = Object.keys(req.body);
+  keys.forEach((key, index) => {
+    console.log(query);
+    if (key == "Users_id") return;
+    if (typeof req.body[key] === "string") {
+      if (index == keys.length - 1) {
+        query += `${key} = "${req.body[key]}"`;
+        return;
+      }
+      query += `${key} = "${req.body[key]}" ,`;
+    } else {
+      if (index == keys.length - 1) {
+        query += `${key} = ${req.body[key]}`;
+        return;
+      }
+      query += `${key} = ${req.body[key]} ,`;
+    }
+  });
+
+  query += ` WHERE Users_id = ${req.body.Users_id}`;
+
+  Connect().then((connection) => {
+    Query(connection, query)
+      .then((result) => {
+        logging.info(NAMESPACE, "Updating the data", result);
+
+        return res.status(StatusCodes.OK).json({
+          result,
+        });
+      })
+      .catch((error) => {
+        return UtilsInstance.defaultError(error, res);
+      })
+      .finally(() => {
+        UtilsInstance.closeDb(connection);
+      });
+  });
+}
+
 export function createUser(req, res) {
   if (Object.keys(req.body).length < 10) {
     return res.status(StatusCodes.BAD_REQUEST).json({
