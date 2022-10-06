@@ -19,9 +19,14 @@ async function create(req, res) {
     Query(connection, query)
       .then((result) => {
         logging.info(NAMESPACE, `${NAMESPACE} successfully created`, result);
-        return res.status(StatusCodes.OK).json({
-          result,
-        });
+        const query = `DELETE FROM Sales WHERE Sneaker_id = ${req.body.Sneaker_id}`
+        Query(connection, query)
+        .then((result) => {
+          return res.status(StatusCodes.OK).json({
+            result,
+          });
+
+        })
       })
       .catch((error) => {
         return UtilsInstance.defaultError(error, res);
