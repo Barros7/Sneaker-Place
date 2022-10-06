@@ -11,8 +11,7 @@ export async function updateUser(req, res) {
 
   const keys = Object.keys(req.body);
   keys.forEach((key, index) => {
-    console.log(query);
-    if (key == "Users_id") return;
+    if (key == "Users_id" || req.body[key] == "") return;
     if (typeof req.body[key] === "string") {
       if (index == keys.length - 1) {
         query += `${key} = "${req.body[key]}"`;

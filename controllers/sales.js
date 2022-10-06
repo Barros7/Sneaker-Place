@@ -60,7 +60,7 @@ async function getAll(_, res) {
 
 async function get(req, res) {
 
-  const query = `SELECT * FROM Sales WHERE Users_id = ${req.body.Users_id} AND Sneaker_id = ${req.body.Sneaker_id}`;
+  const query = `SELECT * FROM Sales WHERE Users_id = ${req.body.Users_id}`;
 
   Connect().then((connection) => {
     Query(connection, query)
